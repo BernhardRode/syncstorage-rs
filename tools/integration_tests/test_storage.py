@@ -1279,7 +1279,11 @@ class TestStorage(StorageFunctionalTestCase):
         # With X-I-M-S set to after latest change , all should give a 304.
         headers = {"X-If-Modified-Since": str(ts1)}
         for view in INFO_VIEWS:
-            self.app.get(self.root + view, headers=headers, status=304)
+            r = self.app.get(self.root + view, headers=headers, status=304)
+            print('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ')
+            from pprint import pprint
+            pprint(r)
+            pprint(r.headers)
         # Change a collection.
         bso = {"payload": "TEST"}
         r = self.retry_put_json(self.root + "/storage/xxx_col2/TEST", bso)
